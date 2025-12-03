@@ -1,17 +1,21 @@
 const pool = require("../config/db");
 
 exports.guardarCotizacion = async (req, res) => {
-    try {
-        const { proyecto_id, total } = req.body;
+  try {
+    const { nombre, correo, descripcion } = req.body;
 
-        const [result] = await pool.query(
-            `INSERT INTO cotizaciones (proyecto_id, total)
-             VALUES (?, ?)`,
-            [proyecto_id, total]
-        );
+    console.log("Datos recibidos:", req.body);
 
-        res.json({ cotizacion_id: result.insertId });
-    } catch (err) {
-        res.status(500).json({ error: "Error guardando cotización" });
-    }
+    const [result] = await pool.query(
+      `INSERT INTO cotizaciones (nombre, correo, descripcion)
+       VALUES (?, ?, ?)`,
+      [nombre, correo, descripcion]
+    );
+
+    res.json({ cotizacion_id: result.insertId });
+
+  } catch (err) {
+    console.error("Error guardando:", err);
+    res.status(500).json({ error: "Error guardando cotización" });
+  }
 };
