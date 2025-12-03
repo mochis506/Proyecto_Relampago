@@ -469,16 +469,22 @@
                     <script>
                         async function guardarCotizacion() {
                             try {
+                                console.log("Entró a guardarCotizacion");
+                        
                                 const cotizacion = {
                                     proyecto_id: document.getElementById("tipoConstruccion").value,
                                     total: Number(document.getElementById("totalCosto").value)
                                 };
+                        
+                                console.log("Datos enviados:", cotizacion);
                         
                                 const response = await fetch("https://proyecto-relampago-ejt1.onrender.com/api/cotizacion", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(cotizacion)
                                 });
+                        
+                                console.log("Status:", response.status);
                         
                                 if (!response.ok) {
                                     alert("Error guardando la cotización");
@@ -487,14 +493,11 @@
                         
                                 alert("Cotización guardada correctamente");
                             } catch (err) {
+                                console.log("Error:", err);
                                 alert("Error de conexión");
                             }
                         }
                         </script>
-                        
-
-                    
-
     <script>
         const materialsDatabase = {
             // Estructura base - varía según tipo de construcción
