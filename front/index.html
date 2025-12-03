@@ -466,32 +466,32 @@
                     <button class="btn" onclick="downloadPDF()">Descargar PDF</button>
                     <button class="btn" onclick="guardarCotizacion()">Guardar Cotización</button>
 
-<script>
-async function guardarCotizacion() {
-    try {
-        const cotizacion = {
-            tipoConstruccion: document.getElementById("tipoConstruccion").value,
-            metros: Number(document.getElementById("metros").value),
-            total: Number(document.getElementById("totalCosto").value)   // ← corregido
-        };
-
-        const response = await fetch("https://tiusr35pl.cuc-carrera-ti.ac.cr/api/cotizaciones", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(cotizacion)
-        });
-
-        if (!response.ok) {
-            alert("Error guardando la cotización");
-            return;
-        }
-
-        alert("Cotización guardada correctamente");
-    } catch (err) {
-        alert("Error de conexión");
-    }
-}
-</script>
+                    <script>
+                        async function guardarCotizacion() {
+                            try {
+                                const cotizacion = {
+                                    proyecto_id: document.getElementById("tipoConstruccion").value,
+                                    total: Number(document.getElementById("totalCosto").value)
+                                };
+                        
+                                const response = await fetch("https://proyecto-relampago-ejt1.onrender.com/api/cotizacion", {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(cotizacion)
+                                });
+                        
+                                if (!response.ok) {
+                                    alert("Error guardando la cotización");
+                                    return;
+                                }
+                        
+                                alert("Cotización guardada correctamente");
+                            } catch (err) {
+                                alert("Error de conexión");
+                            }
+                        }
+                        </script>
+                        
 
                     
 
